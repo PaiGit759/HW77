@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HW77</title>
+    <style type="text/css">
+        body {
+            background-color: rgb(150, 150, 202);
+        }
+
+        .exsample {
+            top: 5%;
+        }
+
+        .exsample1 {
+            top: 28%;
+        }
+
+        .exsample2 {
+            top: 16%;
+        }
+
+
+        .exsample1 {
+            position: relative;
+            left: 27%;
+            top: 90px;
+            width: 35%;
+            height: 165px;
+            padding-top: 5px;
+            padding-left: 10px;
+            padding-bottom: 10px;
+            font-size: x-large;
+            margin-top: 5px;
+            text-align: justify;
+            background: lightgray;
+            border: 1px solid greenyellow;
+            border-radius: 3%;
+
+        }
+
+        .s1 {
+            color: rgb(235, 10, 10);
+        }
+
+        img {
+            position: absolute;
+            right: 2px;
+            top: 2px;
+            background-color: rgb(229, 125, 5);
+            width: 170px;
+            height: 170px;
+            border: 1px solid green;
+            border-radius: 2px;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="exsample1" id="formForOutPut" name="form1">
+        <div>Text <input type="text" id="text" value="Hello"></div>
+        <div>Size <input type="number" id="size" value="50"></div>
+        <div>Color <input type="text" id="color" value="red"></div>
+        <div style="float: right;"><img src='' id="catimg"></div>
+
+        <div>
+            <button id="btn1" onclick="onClicBtn1()">Add cat</button>
+        </div>
+
+    </div>
+
+    <script>
+        async function onClicBtn1() {
+
+            let url = 'https://cataas.com/cat/says/' +
+                document.getElementById('text').value + '?size=' +
+                document.getElementById('size').value + '&color=' +
+                document.getElementById('color').value + '&json=true';
+
+            let response = await fetch(url);
+
+            let result = await response.json();
+
+            if (response.statusText == "OK") {
+                document.getElementById('catimg').src = '';
+                let caturl = new URL(result.url, "https://cataas.com");
+                document.getElementById('catimg').src = caturl;
+            }
+            else {
+                alert('Failed to load image');
+            };
+
+        }        
+    </script>
+
+</body>
+
+</html>
